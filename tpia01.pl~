@@ -1,0 +1,64 @@
+% Déclaration dynamique pour permettre l'ajout et la suppression de tâches
+:- dynamic(task/4).
+
+% Définition de la tâche
+% Chaque tâche a un identifiant, une description, un utilisateur assigné et un statut
+% task(TaskID, Description, AssigneeUser, Status).
+
+% 1. Créer une tâche si l'ID n'existe pas
+create_task(TaskID, Description, AssigneeUser) :-
+    ( \+ task(TaskID, _, _, _) -> % Vérifie que l'ID n'existe pas
+        assertz(task(TaskID, Description, AssigneeUser, false))
+    ;
+        write('ID already exists.'), nl
+    ).
+
+% 2. Assigner une tâche à un utilisateur
+assign_task_user(TaskID, NewAssigneeUser) :- % Correction ici, utilise NewAssigneeUser
+    (
+        retract(task(TaskID, Description, _, Status)) ->
+        assertz(task(TaskID, Description, NewAssigneeUser, Status)) % Met à jour l'assignataire
+    ;
+        writeln('Task ID does not exist.'), nl
+    ).
+
+% 3. Marquer une tâche comme terminée
+task_completed(TaskID) :-
+    (
+        retract(task(TaskID, Description, AssigneeUser, _)) ->
+        assertz(task(TaskID, Description, AssigneeUser, true)),
+        write('Task completed.'), nl
+    ;
+        write('Task ID does not exist.'), nl
+    ).
+
+% 4. Afficher toutes les tâches
+display_task :-
+    task(TaskID, Description, AssigneeUser, Status), % On récupère chaque tâche
+    write('ID: '), write(TaskID), nl,
+    write('Description: '), write(Description), nl,
+    write('Assignee user: '), write(AssigneeUser), nl,
+    write('Status: '), write(Status), nl,
+    nl, % Ajoute un espace entre les tâches
+    fail.
+display_task. % Point final pour terminer la règle
+
+% 5. Afficher les tâches complètes (filtrage)
+display_tasks_by_filter :- % Correction du nom de la fonction pour l'orthographe
+    task(TaskID, Description, AssigneeUser, true),
+    write('ID: '), write(TaskID), nl,
+    write('Description: '), write(Description), nl,
+    write('Assignee: '), write(AssigneeUser), nl,
+    write('Status: Completed'), nl,
+    nl,
+    fail.
+display_tasks_by_filter. % Point final pour terminer la règle
+
+% 6. Pour tester les fonctions
+% Utilise les exemples suivants dans l'interpréteur Prolog pour tester
+% create_task(1, "Écrire un rapport", "Alice").
+% create_task(2, "Préparer la présentation", "Bob").
+% assign_task_user(1, "Charlie").
+% task_completed(1).
+% display_task.
+% display_tasks_by_filter.

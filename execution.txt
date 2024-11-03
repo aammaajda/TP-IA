@@ -1,0 +1,43 @@
+佸Welcome to SWI-Prolog (threaded, 64 bits, version 8.0.2)
+SWI-Prolog comes with ABSOLUTELY NO WARRANTY. This is free software.
+Please run ?- license. for legal details.
+
+For online help and background, visit http://www.swi-prolog.org
+For built-in help, use ?- help(Topic). or ?- apropos(Word).
+
+?- consult('C:/Users/PC/Desktop/prolog/tpia01.pl').
+true.
+
+?- create_task(1, "Écrire un rapport", "Raouf").
+true.
+
+?- create_task(2, "Préparer la présentation", "Majda").
+true.
+
+?-  assign_task_user(1, "Ecrire").
+true.
+
+?- task_completed(1).
+Task completed.
+true.
+
+?- display_task.
+ID: 2
+Description: Préparer la présentation
+Assignee user: Majda
+Status: false
+
+ID: 1
+Description: Écrire un rapport
+Assignee user: Ecrire
+Status: true
+
+true.
+
+?- display_tasks_by_filter.
+ID: 1
+Description: Écrire un rapport
+Assignee: Ecrire
+Status: Completed
+
+true.
