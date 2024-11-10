@@ -1,0 +1,66 @@
+Welcome to SWI-Prolog (threaded, 64 bits, version 8.0.2)
+SWI-Prolog comes with ABSOLUTELY NO WARRANTY. This is free software.
+Please run ?- license. for legal details.
+
+For online help and background, visit http://www.swi-prolog.org
+For built-in help, use ?- help(Topic). or ?- apropos(Word).
+
+?- consult("C:/Users/PC/Desktop/prolog/tpia02.pl").
+true.
+
+?- is_member([1, 2, 3, 4], 3).
+true .
+
+?- is_member([1, 2, 3, 4], 5).
+false.
+
+?- first(X, [a, b, c]).
+X = a.
+
+?- first(X, [1, 2, 3, 4]).
+X = 1.
+
+?- my_last(X, [a, b, c, d]).
+X = d .
+
+?- my_last(X, [1, 2, 3, 4]).
+X = 4 .
+
+?- penultimate(X, [a, b, c, d]).
+X = c .
+
+?- penultimate(X, [1, 2, 3, 4]).
+X = 3 .
+
+?- del_k(X, [a, b, c, d], 2, R).
+X = b,
+R = [a, c, d] .
+
+?- del_k(X, [1, 2, 3, 4], 3, R).
+X = 3,
+R = [1, 2, 4] .
+
+?- len([1, 2, 3], N).
+N = 3.
+
+?- even([1, 2, 3, 4]).
+true.
+?- even([a, b, c]).
+false.
+
+?- concant([a, b], [c, d], L).
+L = [a, b, c, d].
+
+?- palindrome([a, b, a]).
+true.
+
+?-  palindrome([1, 2, 3]).
+false.
+
+?-  palindr([a, b, a]).
+true .
+
+?- palindr([1, 2, 3]).
+false.
+
+?- 
